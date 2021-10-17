@@ -1,0 +1,66 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/adampeer/Choropleth-Map/main/Tourist-Arrival-by-Country-of-Residence.csv"
+  },
+  "vconcat": [
+    {
+      "width": 800,
+      "height": 300,
+      "title": "Tourist Arrivals by Country of Residence (2013-2019)",
+      "projection": {
+        "type": "equalEarth"
+      },
+      "layer": [
+        {
+          "transform": [
+            {
+              "aggregate": [
+                {
+                  "op": "sum",
+                  "field": "Number",
+                  "as": "sum_Number"
+                }
+              ],
+              "groupby": [
+                "Country"
+              ]
+            },
+            {
+              "lookup": "Country",
+              "from": {
+                "data": {
+                  "url": "https://raw.githubusercontent.com/KaneSec/vega_lite/main/3_choropleth_map/js/ne_110m_admin_0_countries.topojson",
+                  "format": {
+                    "type": "topojson",
+                    "feature": "ne_110m_admin_0_countries"
+                  }
+                },
+                "key": "properties.NAME"
+              }
+            }
+          ],
+          "mark": {
+            "type": "geoshape",
+            "stroke": "#fff",
+            "strokeWidth": 0.5
+          },
+          "encoding": {
+            "shape": {
+              "field": "Country",
+              "type": "geojson"
+            },
+            "color": {
+              "field": "sum_Number",
+              "type": "quantitative",
+              "legend": {
+                "title": "Total Arrivals"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "config": {}
+}

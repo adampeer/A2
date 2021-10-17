@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="https://unpkg.com/d3-array@1"></script>
+  <script src="https://unpkg.com/d3-collection@1"></script>
+  <script src="https://unpkg.com/d3-path@1"></script>
+  <script src="https://unpkg.com/d3-shape@1"></script>
+  <script src="https://unpkg.com/d3-sankey@0"></script>
+  <link rel="stylesheet" href="viz_style.css">
+</head>
+
+<body>
+  <div class="nav">
+    <input type="checkbox" id="nav-check">
+    <div class="nav-header">
+      <div class="nav-title">
+        FIT3179 Assignment 2
+      </div>
+    </div>
+    <div class="nav-btn">
+      <label for="nav-check">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+    </div>
+
+    <div class="nav-links">
+      <a href="#map-title">Map</a>
+      <a href="#peak-season-title">Peak Season</a>
+      <a href="#gna-title">Gender and Age</a>
+      <a href="#exp-title">Expenditure</a>
+      <a href="#covid-title">Covid Impact</a>
+    </div>
+  </div>
+
+
+  <div id="main-body">
+    <div id="viz-area">
+
+      <div id="header">
+        <div id="img-container">
+          <img src="Mauritius-its-a-pleasure-logo.png" id="mru-logo">
+        </div>
+        <div id="subtitle">
+          <h1>Tourism in Mauritius <br> <span id="quote">“The world is a book, and those who don't travel only read one
+              page.” - St Augustine</span></h1>
+        </div>
+      </div>
+
+      <div id="quick-facts">
+        <div id="quick-facts-title">
+          <!-- <h2 >Facts & Figures</h2> -->
+          <p style="text-align: center;">Famous for its breathtaking beaches and natural landscape, Mauritius, a tiny
+            island in the Indian Ocean, is
+            one of the most visited destination in Africa. The tourism industry is a pillar to the Mauritian economy as
+            it brings
+            in foreign currencies needed for imports and provides direct and indirect jobs to thousands of people. Data
+            for the year 2020 has been excluded except for the last chart since it does not reflect the true reality of
+            the tourism industry.
+          </p>
+        </div>
+        <div class="quick-facts-row row-1">
+          <div class="quick-facts-col col-1">
+            <div class="quick-facts-img">
+              <img src="https://img.icons8.com/color/150/000000/money--v2.png" />
+            </div>
+            <div class="quick-facts-text">
+              <p><span class="important-facts">MUR 98.2 BN</span> <br>of total economy</p>
+              </p>
+            </div>
+          </div>
+          <div class="quick-facts-col col-2">
+            <div class="quick-facts-img">
+              <img src="https://img.icons8.com/fluency/150/000000/france-map.png" />
+            </div>
+            <div class="quick-facts-text">
+              <p><span class="important-facts">France</span> <br> is where most tourists come from </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="quick-facts-row row-2">
+          <div class="quick-facts-col col-3">
+            <div class="quick-facts-img">
+              <img src="https://img.icons8.com/color/150/000000/pie-chart--v1.png" />
+            </div>
+            <div class="quick-facts-text">
+              <p><span class="important-facts">19.5%</span> <br> of total GDP</p>
+            </div>
+          </div>
+          <div class="quick-facts-col col-4">
+            <div class="quick-facts-img">
+              <img
+                src="https://img.icons8.com/external-others-sbts2018/150/000000/external-jobs-social-media-basic-1-others-sbts2018.png" />
+            </div>
+            <div class="quick-facts-text">
+              <p><span class="important-facts">19.2%</span> <br> of total employement</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1. Map Area -->
+      <div class="chart-area" id="map-area">
+
+        <div class="chart-title" id="map-title">
+          <h2>Where do tourists come from?</h2>
+        </div>
+
+        <div class="chart-description">
+          <p>Over <span class="highlight">1 million</span> tourists from more than <span class="highlight">100</span>
+            countries visited Mauritius in
+            2019.
+            <br>
+            There were more tourists from <span class="highlight">France</span> than any other countries, with more than
+            <span class="highlight">30%</span> of tourists residing in the Hexagon.
+          </p>
+        </div>
+
+        <div id="map-vega-lite"></div>
+        <p>The total number of tourists coming to Mauritius has been steadily increasing since the year 2013.</p>
+      </div>
+
+      <!-- <div class="img-sep-div">
+        <div class="img-1">
+        </div>
+        <div class="img-2">
+          <img src="calendar.svg" class="img-polaroid">
+        </div>
+        <div class="img-3">
+        </div>
+      </div> -->
+
+      <!-- 2. Peak Season Area -->
+      <div class="chart-area" id="peak-season-area">
+
+        <div class="chart-title" id="peak-season-title">
+          <h2>Peak Season</h2>
+        </div>
+
+        <div class="chart-description">
+          <p><span class="highlight">December</span> is the most popular month amoung tourists. That is no surprise
+            considering summer runs from November to April and December is one of the hottest months in Mauritius.
+            Moreover, a lot of people go on vacation to celebrate Christmas and the New Year.
+            <br>
+            On the other hand, <span class="highlight">July</span> usually welcomes the least number of tourists. Again,
+            this is no surprise since this is one of the coldest months.
+          </p>
+        </div>
+
+        <div id="peak-season-d3js">
+          <svg id="chart-peak-season-d3js" width="960" height="960" preserveAspectRatio="xMidYMid meet"
+            font-family="sans-serif" font-size="10"></svg>
+        </div>
+      </div>
+
+      <!-- 3. Gender and Age -->
+      <div class="chart-area" id="gna-area">
+
+        <div class="chart-title" id="gna-title">
+          <h2>Gender and Age</h2>
+        </div>
+
+        <div class="chart-description">
+          <p>The ratio of male to female tourists is almost <span class="highlight">100%</span>.
+            <br>
+            For male tourists, about <span class="highlight">11%</span> were aged between <span class="highlight">30 to
+              34</span> whereas for female tourists, about <span class="highlight">12%</span> were aged between <span
+              class="highlight">25 to 29</span>
+          </p>
+        </div>
+
+        <div id="gna-d3">
+        </div>
+      </div>
+
+      <!-- <div class="img-sep-div">
+        <div class="img-1">
+        </div>
+        <div class="img-2">
+          <img src="money.svg" class="img-polaroid">
+        </div>
+        <div class="img-3">
+        </div>
+      </div> -->
+
+      <!-- 4. Expenditure -->
+      <div class="chart-area" id="exp-area">
+
+        <div class="chart-title" id="exp-title">
+          <h2>Expenditure Per Night</h2>
+        </div>
+
+        <div class="chart-description">
+          <p>More money is spent on <span class="highlight">Accomodation</span> than anything else. This represents over
+            <span class="highlight">60%</span> of total expenditure (per night).
+            <br>
+            Tourists from <span class="highlight">China, USA</span> and <span class="highlight">UAE</span> spent more
+            money than any other tourists (per night).
+          </p>
+        </div>
+
+        <div id="exp-main-vega-lite">
+          <div id="exp-vega-lite-1"></div>
+          <div id="exp-vega-lite-2"></div>
+        </div>
+
+      </div>
+
+      <!-- 5. Covid Impact Area -->
+      <div class="chart-area" id="covid-impact-area">
+
+        <div class="chart-title" id="covid-title">
+          <h2>Impact of Covid-19 on Tourism</h2>
+        </div>
+
+        <div class="chart-description">
+          <p>Like most countries around the world, <span class="highlight">Covid-19</span> greatly impacted the tourism
+            sector in Mauritius. With borders closing here and abroad, the tourism sector took a big hit.
+            <br>
+            Only <span class="highlight">20%</span> of tourists visited Mauritius in 2020 compared to 2019.
+          </p>
+        </div>
+
+        <div id="covid-impact-vega-lite"></div>
+        <p>However, with restrictions being eased around the world and the rollout of vaccines, the future of the
+          tourism industry in Mauritius is looking bright. </p>
+
+      </div>
+
+      <div id="ref">
+        <p>Author: Adam Peer
+          <br>
+          Source:
+          <a target="_blank" id="ref-link"
+            href="https://statsmauritius.govmu.org/Pages/Statistics/By_Subject/Tourism/SB_Tourism.aspx">
+            Statistics Mauritius</a>
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <script src="app.js" async defer></script>
+  <script src="sankey.js" async defer></script>
+</body>
+
+</html>

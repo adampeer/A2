@@ -1,0 +1,192 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/adampeer/Choropleth-Map/main/Tourist-Arrival-by-Country-of-Residence.csv"
+  },
+  "background": "#E8F6EF",
+  "vconcat": [
+    {
+      "width": 500,
+      "height": 500,
+      "projection": {
+        "type": "equalEarth"
+      },
+      "layer": [
+        {
+          "data": {
+            "url": "https://raw.githubusercontent.com/KaneSec/vega_lite/main/2_symbol_map/js/ne_110m_admin_0_countries.topojson",
+            "format": {
+              "type": "topojson",
+              "feature": "ne_110m_admin_0_countries"
+            }
+          },
+          "transform": [
+            {
+              "calculate": "'Data is not available in ' + datum.properties.NAME",
+              "as": "note"
+            }
+          ],
+          "mark": {
+            "type": "geoshape",
+            "fill": "#ddd",
+            "stroke": "#E8F6EF",
+            "strokeWidth": 1
+          },
+          "encoding": {
+            "tooltip": {
+              "field": "note"
+            }
+          }
+        },
+        {
+          "transform": [
+            {
+              "filter": {
+                "param": "time_brush"
+              }
+            },
+            {
+              "aggregate": [
+                {
+                  "op": "sum",
+                  "field": "Number",
+                  "as": "sum_Number"
+                }
+              ],
+              "groupby": [
+                "Country"
+              ]
+            },
+            {
+              "lookup": "Country",
+              "from": {
+                "data": {
+                  "url": "https://raw.githubusercontent.com/KaneSec/vega_lite/main/2_symbol_map/js/ne_110m_admin_0_countries.topojson",
+                  "format": {
+                    "type": "topojson",
+                    "feature": "ne_110m_admin_0_countries"
+                  }
+                },
+                "key": "properties.NAME"
+              },
+              "as": "geo"
+            }
+          ],
+          "mark": {
+            "type": "geoshape",
+            "stroke": "#fff",
+            "strokeWidth": 0.5
+          },
+          "encoding": {
+            "shape": {
+              "field": "geo",
+              "type": "geojson"
+            },
+            "color": {
+              "field": "sum_Number",
+              "type": "quantitative",
+              "legend": {
+                "title": "Total Number of Tourist"
+              },
+              "scale": {
+                "type": "threshold",
+                "domain": [
+                  1000,
+                  5000,
+                  10000,
+                  100000,
+                  1000000,
+                  1500000
+                ],
+                "range": [
+                  "#d0d1e6",
+                  "#a6bddb",
+                  "#74a9cf",
+                  "#2b8cbe",
+                  "#045a8d",
+                  "#084594"
+                ]
+              }
+            },
+            "tooltip": [
+              {
+                "field": "Country",
+                "type": "nominal",
+                "title": "Country/Region"
+              },
+              {
+                "field": "sum_Number",
+                "type": "quantitative",
+                "title": "Total Tourists",
+                "format": ","
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "width": "container",
+      "height": 100,
+      "params": [
+        {
+          "name": "time_brush",
+          "select": {
+            "type": "interval",
+            "encodings": [
+              "x"
+            ]
+          }
+        }
+      ],
+      "mark": {
+        "type": "line"
+      },
+      "encoding": {
+        "x": {
+          "timeUnit": "year",
+          "field": "Year",
+          "type": "temporal",
+          "axis": {
+            "title": "Year",
+            "format": "%Y",
+            "tickCount": {
+              "interval": "year",
+              "step": 1
+            },
+            "gridOpacity": 0.5
+          }
+        },
+        "y": {
+          "field": "Number",
+          "aggregate": "sum",
+          "axis": {
+            "tickCount": 4,
+            "title": "Total Number of Tourist Arrival",
+            "gridOpacity": 0.5
+          },
+          "scale": {
+            "domain": [
+              900000,
+              1500000
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": "transparent"
+    },
+    "legend": {
+      "gradientLength": 500,
+      "orient": "bottom",
+      "layout": {
+        "bottom": {
+          "anchor": "middle"
+        }
+      }
+    }
+  }
+}

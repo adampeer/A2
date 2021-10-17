@@ -1,0 +1,450 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
+
+*
+{
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto";
+}
+
+.node rect {
+  cursor: move;
+  fill-opacity: .9;
+  shape-rendering: crispEdges;
+}
+
+.node text {
+  pointer-events: none;
+  text-shadow: 0 1px 0 #fff;
+}
+
+.link {
+  fill: none;
+  stroke: #000;
+  stroke-opacity: .2;
+}
+
+.link:hover {
+  stroke-opacity: .5;
+}
+
+.nav 
+{
+  height: auto;
+  width: 100%;
+  background-color: #2F4858;
+  position: fixed;
+  z-index: 100;
+}
+
+.nav > .nav-header 
+{
+  display: inline;
+}
+
+.nav > .nav-header > .nav-title 
+{
+  display: inline-block;
+  font-size: 22px;
+  color: #fff;
+  padding: 10px 10px 10px 10px;
+}
+
+.nav > .nav-btn 
+{
+  display: none;
+}
+
+.nav > .nav-links 
+{
+  display: inline;
+  float: right;
+  font-size: 18px;
+}
+
+.nav > .nav-links > a 
+{
+  display: inline-block;
+  padding: 13px 10px 13px 10px;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.nav > .nav-links > a:hover 
+{
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.nav > #nav-check 
+{
+  display: none;
+}
+
+@media (max-width:600px) {
+  .nav > .nav-btn {
+    display: inline-block;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+  }
+  .nav > .nav-btn > label {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    padding: 13px;
+  }
+  .nav > .nav-btn > label:hover,.nav  #nav-check:checked ~ .nav-btn > label {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+  .nav > .nav-btn > label > span {
+    display: block;
+    width: 25px;
+    height: 10px;
+    border-top: 2px solid #eee;
+  }
+  .nav > .nav-links {
+    position: absolute;
+    display: block;
+    width: 100%;
+    background-color: #333;
+    height: 0px;
+    transition: all 0.3s ease-in;
+    overflow-y: hidden;
+    top: 50px;
+    left: 0px;
+  }
+  .nav > .nav-links > a {
+    display: block;
+    width: 100%;
+  }
+  .nav > #nav-check:not(:checked) ~ .nav-links {
+    height: 0px;
+  }
+  .nav > #nav-check:checked ~ .nav-links {
+    height: calc(100vh - 50px);
+    overflow-y: auto;
+  }
+}
+
+h2
+{
+  text-align: center;
+}
+
+#main-body
+{
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10vh;
+}
+
+#viz-area
+{
+  padding: 0;
+  padding-top: 2vh;
+  margin: 0vh;
+  border: 0;
+  width: 80vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* background-color: #E8F6EF; */
+}
+
+#header
+{
+  width: 80vw;
+  height: auto;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  border-bottom: 5px solid white;
+}
+
+#subtitle
+{
+  color: #337683;
+  font-size: 2em;
+  font-family: 'Caveat';
+  padding-top: 2vh;
+  padding-bottom: 40px;
+  height: auto;
+}
+
+#quote
+{
+  font-family: 'Caveat';
+  font-size: 0.4em;
+  font-family: 'Satisfy', cursive;
+}
+
+#img-container
+{
+  width: 100%;
+  height: 40vh;
+}
+
+#subtitle
+{
+  width: 80vw;
+  height: 10vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+#mru-logo
+{
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#quick-facts
+{
+  width: 80vw;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  /* border-top: 2px solid #2F4858;
+  border-bottom: 2px solid #2F4858; */
+  /* border-bottom: 5px solid white; */
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+}
+
+.quick-facts-row
+{
+  width: 80vw;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+}
+
+.quick-facts-col
+{
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+
+}
+
+.quick-facts-img
+{
+  width: 10vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quick-facts-text
+{
+  width: 20vw;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  text-align: center;
+}
+
+.important-facts
+{
+  font-size: xx-large;
+  color: red;
+}
+
+.row-1, .row-2
+{
+  height: 50%;
+}
+
+#country-selection
+{
+  width: 100%;
+  height: auto;
+  border-bottom: 5px solid white;
+  text-align: center;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+}
+
+.selected 
+{
+  border: solid 5px red;
+  margin: 10px;
+  border-radius: 150px;
+}
+
+.img-sep-div
+{
+  width: 80vw;
+  height: 20vw;
+  display: flex;
+  flex-direction: row;
+  border-bottom: 5px solid white;
+}
+
+.img-1, .img-2, .img-3
+{
+  width: 26vw;
+  height: 20vw;
+  display: flex;
+  justify-content: center;
+}
+
+.img-1
+{
+  /* background-color: blue; */
+}
+
+.img-2
+{
+    /* border-top: 2px solid #2F4858; */
+}
+.img-3
+{
+  /* background-color: blue; */
+}
+
+.img-polaroid
+{
+  max-width:100%;
+  max-height:100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.chart-area
+{
+  width: 80vw;
+  height: auto;
+  border-bottom: 5px solid white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border-top: 2px solid #2F4858;
+}
+
+p
+{
+  font-size: 1.2em;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 800;
+  line-height: 250%;
+}
+
+.highlight
+{
+  color: #EB9928;
+  font-size: x-large;
+}
+
+.chart-title
+{
+  width: 100%;
+  height: auto;
+  padding: 2vh;
+  font-size: 2em;
+  color: #2F4858;
+  /* border-top: 2px solid #2F4858; */
+}
+
+#map-area
+{
+  width: 80vw;
+  height: auto;
+}
+
+#map-vega-lite
+{
+  width: 100%;
+  height: 100%;
+}
+
+#peak-season-area
+{
+  width: 80vw;
+  height: auto;
+}
+
+#chart-peak-season-d3js
+{
+  width: 100%;
+  height: auto;
+}
+
+#gna-area
+{
+  width: 80vw;
+  height: auto;
+}
+
+#exp-main-vega-lite
+{
+  width: 80vw;
+  height: auto;
+  display: flex;
+}
+
+#exp-vega-lite-1
+{
+  width: 50%;
+  height: 100%;
+  align-items: end;
+}
+
+#exp-vega-lite-2
+{
+  width: 50%;
+  height: 100%;
+}
+
+#covid-impact-area
+{
+  width: 80vw;
+  height: 40vw;
+}
+
+#covid-impact-vega-lite
+{
+  width: 100%;
+  height: 100%;
+}
+
+#chart-peak-season-d3js
+{
+  padding-top: 2vh;
+}
+
+#ref
+{
+  width: 80vw;
+  height: auto;
+  background-color: #2F4858;
+  margin-top: 20px;
+  color: white;
+  font-size: 0.8em;
+  padding-left: 10px;
+  text-align: center;
+}
+
+#ref-link
+{
+  color: white;
+  font-family: 'Open Sans';
+  font-size: 1em;
+}

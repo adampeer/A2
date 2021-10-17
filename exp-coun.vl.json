@@ -1,0 +1,133 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "transparent",
+  "width": "container",
+  "height": 500,
+  "padding": {
+    "top": 24,
+    "right": 24,
+    "bottom": 24,
+    "left": 0
+  },
+  "data": {
+    "url": "Country-Expenditure.csv"
+  },
+  "mark": {
+    "type": "circle",
+    "opacity": 1,
+    "stroke": "none",
+    "strokeWidth": 0
+  },
+  "encoding": {
+    "x": {
+      "field": "Year",
+      "type": "temporal",
+      "scale": {
+        "domain": [
+          "2014.8",
+          "2015",
+          "2016",
+          "2017",
+          "2018"
+        ]
+      },
+      "axis": {
+        "labelExpr": "timeFormat(datum.value, '%Y')",
+        "grid": false,
+        "tickCount": 4,
+        "values": [
+          "2015",
+          "2016",
+          "2017",
+          "2018"
+        ],
+        "offset": 0
+      }
+    },
+    "y": {
+      "field": "Country",
+      "type": "nominal",
+      "axis": {
+        "labelAngle": -90,
+        "title": "",
+        "offset": 0,
+        "grid": false
+      }
+    },
+    "size": {
+      "field": "Amount",
+      "type": "quantitative",
+      "title": "Amount spent (MUR)",
+      "legend": {
+        "symbolFillColor": "grey",
+        "symbolStrokeWidth": 0,
+        "orient": "none",
+        "direction": "horizontal",
+        "legendX": 120,
+        "legendY": 600,
+        "title": "Amount spent (MUR)",
+        "titleAlign": "center"
+      },
+      "scale": {
+        "rangeMax": 2500
+      }
+    },
+    "color": {
+      "field": "Country",
+      "type": "nominal",
+      "legend": null,
+      "scale": {
+        "range": [
+          "#f4f1de",
+          "#e07a5f",
+          "#3d405b",
+          "#81b29a",
+          "#f2cc8f"
+        ]
+      }
+    },
+    "tooltip": [
+      {
+        "field": "Country",
+        "type": "nominal"
+      },
+      {
+        "field": "Amount",
+        "type": "quantitative",
+        "format": ",",
+        "title": "Amount (MUR)"
+      },
+      {
+        "field": "Year",
+        "type": "temporal",
+        "format": "%Y"
+      }
+    ]
+  },
+  "config": {
+    "view": {
+      "stroke": "transparent"
+    },
+    "axis": {
+      "labelFont": "Roboto",
+      "titleFont": "Roboto"
+    },
+    "legend": {
+      "labelFont": "Roboto",
+      "titleFont": "Roboto",
+      "titleAlign": "center"
+    },
+    "header": {
+      "labelFont": "Roboto",
+      "titleFont": "Roboto"
+    },
+    "mark": {
+      "font": "Roboto"
+    },
+    "title": {
+      "font": "Roboto",
+      "subtitleFont": "Roboto",
+      "fontSize": 20
+    }
+  }
+}

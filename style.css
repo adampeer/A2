@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500&display=swap');
+
+*
+{
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto";
+}
+
+#welcome-screen
+{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#welcome-text
+{
+  width: 100vw;
+  height: 20vh;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+#welcome-title
+{
+  font-size: 3em;
+  color: #606377;
+}
+
+#welcome-subtitle
+{
+  font-family: 'Caveat', cursive;
+  font-size: 3em;
+  color: #3892BB;
+}
+
+#welcome-image
+{
+  width: 100vw;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#lux-le-morne
+{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70vw;
+  height: auto;
+}
+
+#enter-button
+{
+  width: 100vw;
+  height: 10vh;
+  padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#start-button
+{
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  background-color: white; 
+  color: black; 
+  border: 2px solid #3892BB;
+  border-radius: 100px;
+}
+
+#start-button:hover {
+  background-color: #3892BB;
+  color: white;
+}
+
+#covid-impact
+{
+  text-align: center;
+}
+
+#vg-tooltip-element
+{
+  background-color: rgb(206, 231, 231);
+}
+
+input
+{
+  width: 900px;
+}
+
+/*viz.html*/
+#viz-area
+{
+  background-color: burlywood;
+  padding: 0;
+  padding-top: 100px;
+  margin: 0;
+  border: 0;
+  width: 80vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#header
+{
+  width: 80vw;
+  height: 10vh;
+  background-color: aqua;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+#country-selection
+{
+  width: 80vw;
+  height: 10vh;
+  background-color: gray;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}

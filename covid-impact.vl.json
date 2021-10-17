@@ -1,0 +1,210 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "transparent",
+  "width": "container",
+  "height": "container",
+  "data": {
+    "url": "Tourism-Covid-Effect-2020.csv"
+  },
+  "params": [
+    {
+      "name": "Year_selection",
+      "value": 2020,
+      "bind": {
+        "input": "range",
+        "min": 2018,
+        "max": 2020,
+        "step": 1,
+        "name": "Timeline: "
+      }
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "Date",
+      "type": "temporal",
+      "axis": {
+        "grid": false,
+        "tickCount": 12,
+        "labelAlign": "left",
+        "labelExpr": "[timeFormat(datum.value, '%b'), timeFormat(datum.value, '%m') == '01' ? timeFormat(datum.value, '%Y') : '']",
+        "labelOffset": 4,
+        "labelPadding": -24,
+        "tickSize": 30
+      }
+    },
+    "y": {
+      "axis": {
+        "gridOpacity": 0.7
+      }
+    }
+  },
+  "transform": [
+    {
+      "filter": "year(datum.Date) <= Year_selection"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "size": 3
+      },
+      "encoding": {
+        "y": {
+          "field": "Number",
+          "title": "Number of tourist arrival",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "size": 100
+      },
+      "encoding": {
+        "y": {
+          "field": "Number",
+          "title": "Number of tourist arrival",
+          "type": "quantitative"
+        },
+        "opacity": {
+          "condition": {
+            "value": 0.3,
+            "param": "hover",
+            "empty": false
+          },
+          "value": 0
+        }
+      }
+    },
+    {
+      "mark": "rule",
+      "encoding": {
+        "opacity": {
+          "condition": {
+            "value": 0.3,
+            "param": "hover",
+            "empty": false
+          },
+          "value": 0
+        },
+        "tooltip": [
+          {
+            "field": "Date",
+            "type": "temporal"
+          },
+          {
+            "field": "Number",
+            "type": "quantitative",
+            "title": "Number of tourists",
+            "format": ","
+          }
+        ]
+      },
+      "params": [
+        {
+          "name": "hover",
+          "select": {
+            "type": "point",
+            "fields": [
+              "Date"
+            ],
+            "nearest": true,
+            "on": "mouseover",
+            "clear": "mouseout"
+          }
+        }
+      ]
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "size": 14,
+        "dx": 13
+      },
+      "encoding": {
+        "y": {
+          "field": "Number",
+          "title": "Number of tourist arrival",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "Date",
+          "type": "temporal",
+          "condition": {
+            "test": "dayofyear(datum.Date) == '1' && year(datum.Date) == '2020'",
+            "value": [
+              "30th Jan 2020: Covid-19 declared Public Health",
+              "Emergency of International Concern by WHO"
+            ]
+          }
+        },
+        "opacity": {
+          "condition": {
+            "test": "dayofyear(datum.Date) == '1' && year(datum.Date) == '2020'",
+            "value": 1
+          },
+          "value": 0
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "size": 14,
+        "dx": 10
+      },
+      "encoding": {
+        "text": {
+          "field": "Date",
+          "type": "temporal",
+          "condition": {
+            "test": "dayofyear(datum.Date) == '61'",
+            "value": [
+              "20th March 2020: Covid-19 restrictions",
+              "applied in Mauritius. Borders were closed"
+            ]
+          }
+        },
+        "opacity": {
+          "condition": {
+            "test": "dayofyear(datum.Date) == '61'",
+            "value": 1
+          },
+          "value": 0
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": "transparent"
+    },
+    "axis": {
+      "labelFont": "Roboto",
+      "titleFont": "Roboto"
+    },
+    "legend": {
+      "labelFont": "Roboto",
+      "titleFont": "Roboto"
+    },
+    "header": {
+      "labelFont": "Roboto",
+      "titleFont": "Roboto"
+    },
+    "mark": {
+      "font": "Roboto"
+    },
+    "title": {
+      "font": "Roboto",
+      "subtitleFont": "Roboto",
+      "fontSize": 20
+    }
+  }
+}

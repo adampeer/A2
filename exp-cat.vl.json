@@ -1,0 +1,130 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "transparent",
+  "width": "container",
+  "height": 500,
+  "data": {
+    "url": "Expenditure-Categories.csv"
+  },
+  "params": [
+    {
+      "name": "Year_selection",
+      "value": 2018,
+      "bind": {
+        "input": "range",
+        "min": 2015,
+        "max": 2018,
+        "step": 1,
+        "name": "Year: "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "year(datum.Year) == Year_selection"
+    }
+  ],
+  "layer": [
+    {
+      "selection": {
+        "categories_highlight": {
+          "type": "multi",
+          "fields": [
+            "Categories"
+          ],
+          "bind": "legend"
+        }
+      },
+      "mark": {
+        "type": "arc",
+        "innerRadius": 175,
+        "outerRadius": 300,
+        "padAngle": 0.01
+      },
+      "encoding": {
+        "theta": {
+          "field": "Amount",
+          "type": "quantitative",
+          "stack": true
+        },
+        "color": {
+          "field": "Categories",
+          "type": "nominal",
+          "scale": {
+            "range": [
+              "#B6D0E4",
+              "#1C6E7D",
+              "#039590",
+              "#4BBC8E",
+              "#9BDE7E",
+              "#FFC0B8",
+              "#EB9928"
+            ]
+          }
+        },
+        "opacity": {
+          "condition": {
+            "selection": "categories_highlight",
+            "value": 1
+          },
+          "value": 0.2
+        },
+        "order": {
+          "field": "Amount",
+          "sort": "descending"
+        },
+        "tooltip": [
+          {
+            "field": "Categories",
+            "type": "nominal",
+            "title": "Category"
+          },
+          {
+            "field": "Amount",
+            "type": "quantitative",
+            "format": ",",
+            "title": "Amount (MUR)"
+          },
+          {
+            "field": "Year",
+            "type": "temporal",
+            "format": "%Y"
+          }
+        ]
+      }
+    }
+  ],
+  "view": {
+    "stroke": null
+  },
+  "config": {
+    "legend": {
+      "orient": "bottom",
+      "layout": {
+        "bottom": {
+          "anchor": "middle"
+        }
+      }
+    },
+    "axis": {
+      "labelFont": "Roboto",
+      "titleFont": "Roboto"
+    },
+    "legend": {
+      "labelFont": "Roboto",
+      "titleFont": "Roboto",
+      "titleFontSize": 16,
+      "labelFontSize": 12
+    },
+    "header": {
+      "labelFont": "Roboto",
+      "titleFont": "Roboto"
+    },
+    "title": {
+      "font": "Roboto",
+      "subtitleFont": "Roboto",
+      "fontSize": 20,
+      "align": "center"
+    }
+  }
+}
